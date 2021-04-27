@@ -151,6 +151,31 @@ class _MyHomePageState extends State<MyHomePage> {
                 ]
               : [],
         ),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              CheckboxListTile(
+                title: Text('Allow resize?'),
+                value: _resize,
+                onChanged: (bool value) {
+                  setState(() {
+                    _resize = value;
+                  });
+                },
+              ),
+              CheckboxListTile(
+                title: Text('Allow change primer color?'),
+                value: _recolor,
+                onChanged: (bool value) {
+                  setState(() {
+                    _recolor = value;
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
         body: Center(
           child: Container(
             child: Column(
@@ -162,6 +187,104 @@ class _MyHomePageState extends State<MyHomePage> {
                     Icons.alarm,
                     size: _size,
                     color: Color.fromRGBO(_red, _green, _blue, 1),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, 20, 20),
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Slider(
+                              activeColor: Colors.brown,
+                              value: _red.toDouble(),
+                              min: 0.0,
+                              max: 255.0,
+                              onChanged: (value) {
+                                setState(() {
+                                  _red = value.toInt();
+                                });
+                              },
+                            ),
+                          ),
+                          _recolor
+                              ? FloatingActionButton(
+                                  backgroundColor: Colors.red,
+                                  onPressed: () {
+                                    setState(() {
+                                      _red = 255;
+                                      _green = 0;
+                                      _blue = 0;
+                                    });
+                                  },
+                                  child: Text("$_red"),
+                                )
+                              : Text("$_red"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Slider(
+                              activeColor: Colors.brown,
+                              value: _green.toDouble(),
+                              min: 0.0,
+                              max: 255.0,
+                              onChanged: (value) {
+                                setState(() {
+                                  _green = value.toInt();
+                                });
+                              },
+                            ),
+                          ),
+                          _recolor
+                              ? FloatingActionButton(
+                                  backgroundColor: Colors.green,
+                                  onPressed: () {
+                                    setState(() {
+                                      _red = 0;
+                                      _green = 255;
+                                      _blue = 0;
+                                    });
+                                  },
+                                  child: Text("$_green"),
+                                )
+                              : Text("$_green"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Slider(
+                              activeColor: Colors.brown,
+                              value: _blue.toDouble(),
+                              min: 0.0,
+                              max: 255.0,
+                              onChanged: (value) {
+                                setState(() {
+                                  _blue = value.toInt();
+                                });
+                              },
+                            ),
+                          ),
+                          _recolor
+                              ? FloatingActionButton(
+                                  backgroundColor: Colors.blue,
+                                  onPressed: () {
+                                    setState(() {
+                                      _red = 0;
+                                      _green = 0;
+                                      _blue = 255;
+                                    });
+                                  },
+                                  child: Text("$_blue"),
+                                )
+                              : Text("$_blue"),
+                        ],
+                      )
+                    ],
                   ),
                 ),
               ],
