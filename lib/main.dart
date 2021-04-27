@@ -9,11 +9,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'MAP Exercise1',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.brown,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'My Icon'),
     );
   }
 }
@@ -28,44 +28,145 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  double _size = 300;
+  int _red = 50;
+  int _green = 150;
+  int _blue = 255;
+
+  bool _resize = false;
+  bool _recolor = false;
+
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
+          actions: _resize
+              ? [
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10, 12, 0, 12),
+                    width: 30,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 2, color: Colors.white),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.remove,
+                        size: 15.0,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          if (_size > 50) {
+                            _size -= 50;
+                          }
+                        });
+                      },
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10, 12, 0, 12),
+                    width: 30,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 2, color: Colors.white),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: TextButton(
+                      child: Text(
+                        "S",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _size = 100;
+                        });
+                      },
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10, 12, 0, 12),
+                    width: 30,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 2, color: Colors.white),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: TextButton(
+                      child: Text(
+                        "M",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _size = 300;
+                        });
+                      },
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10, 12, 0, 12),
+                    width: 30,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 2, color: Colors.white),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: TextButton(
+                      child: Text(
+                        "L",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _size = 500;
+                        });
+                      },
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10, 12, 10, 12),
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 2, color: Colors.white),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.add,
+                        size: 15.0,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          if (_size < 480) {
+                            _size += 50;
+                          }
+                        });
+                      },
+                    ),
+                  ),
+                ]
+              : [],
+        ),
+        body: Center(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 150, 0, 0),
+                  child: Icon(
+                    Icons.alarm,
+                    size: _size,
+                    color: Color.fromRGBO(_red, _green, _blue, 1),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
